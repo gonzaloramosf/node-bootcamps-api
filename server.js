@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import morgan from "morgan"
 import connectDB from "./config/db.js"
+import errorHandler from "./src/middlewares/error.js"
 // routes
 import bootcamps from "./src/routes/bootcamps.js"
 
@@ -22,6 +23,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/api/v1/bootcamps", bootcamps)
+
+app.use(errorHandler)
 
 const server = app.listen(PORT, console.log("server runing in port 8080"))
 
